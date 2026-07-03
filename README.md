@@ -149,4 +149,4 @@ bin/setup.sh
 - 要把拉片写入飞书表格，安装完成后再执行：`bin/setup-lark-cli.sh`。
 - YouTube 或 Instagram 下载失败时，把视频手动下载到本机，再让 Codex / Claude 继续处理。
 
-更完整的工作流细节见 [CLAUDE.md](CLAUDE.md)。
+更完整的工作流细节见 [WORKFLOW.md](WORKFLOW.md)。

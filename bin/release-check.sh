@@ -29,6 +29,7 @@ fi
 echo
 echo "== 3/5 公开文件边界 =="
 [ -f LICENSE ] || fail "缺少 LICENSE"
+[ -f WORKFLOW.md ] || fail "缺少 WORKFLOW.md"
 [ -f glossary.example.md ] || fail "缺少 glossary.example.md"
 [ -f .gitignore ] || fail "缺少 .gitignore"
 grep -q '^models\.nosync/' .gitignore || fail ".gitignore 未忽略 models.nosync/"
@@ -38,7 +39,7 @@ echo "✅ 忽略规则存在"
 
 echo
 echo "== 4/5 敏感信息扫描 =="
-SCAN_TARGETS="README.md AGENTS.md CLAUDE.md glossary.example.md bin skills LICENSE .gitignore"
+SCAN_TARGETS="README.md AGENTS.md CLAUDE.md WORKFLOW.md glossary.example.md bin skills LICENSE .gitignore"
 if rg -n --glob '!bin/release-check.sh' "my\\.feishu\\.cn/sheets|/Users/|St2s|a4ced2cf|access_token|appSecret|client_secret" $SCAN_TARGETS; then
   fail "发现疑似个人路径、飞书链接/token 或密钥"
 fi
