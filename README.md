@@ -16,19 +16,33 @@
 
 ## 新电脑安装
 
-先准备好三样东西：
+先准备好：
 
 - macOS 电脑
-- Homebrew，没有的话先按 [brew.sh](https://brew.sh/) 安装
 - Codex 或 Claude Code
 
-然后打开「终端」，逐行复制执行：
+然后打开「终端」。
+
+第一步，安装 Homebrew：
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+如果它要求输入密码，就输入你的 Mac 登录密码，然后按回车。输入时屏幕上不会显示字符，这是正常的。
+
+第二步，安装这个项目：
 
 ```bash
 cd ~
 git clone https://github.com/xzkitchen/video-learning-workbench.git
 cd video-learning-workbench
 bin/setup.sh
+```
+
+第三步，看到 `✅ 配置完成` 以后，再安装 Skill：
+
+```bash
 bin/install-skill.sh
 ```
 
@@ -45,6 +59,11 @@ cd ~
 git clone https://github.com/xzkitchen/video-learning-workbench.git
 cd video-learning-workbench
 bin/setup.sh
+```
+
+看到 `✅ 配置完成` 以后，再执行：
+
+```bash
 bin/install-skill.sh
 ```
 
@@ -53,6 +72,11 @@ bin/install-skill.sh
 ```bash
 cd ~/video-learning-workbench
 bin/setup.sh
+```
+
+看到 `✅ 配置完成` 以后，再执行：
+
+```bash
 bin/install-skill.sh
 ```
 

@@ -7,7 +7,14 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
 echo "== 1/6 检查 Homebrew =="
 if ! command -v brew >/dev/null 2>&1; then
-  echo "❌ 未安装 Homebrew。先装它:https://brew.sh ,然后重跑本脚本。"
+  echo "❌ 未安装 Homebrew,本机依赖还不能配置。"
+  echo
+  echo "请先复制执行这一行:"
+  echo '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+  echo
+  echo "Homebrew 安装完成后,回到本目录继续:"
+  echo "cd \"$ROOT\""
+  echo "bin/setup.sh"
   exit 1
 fi
 
