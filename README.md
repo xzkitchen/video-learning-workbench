@@ -48,38 +48,6 @@ bin/install-skill.sh
 
 第一次安装会下载本地语音模型，大约 1.6GB，会比较久。
 
-## 看到系统安装窗口怎么办
-
-如果 macOS 弹出 “Command Line Tools” 或“开发者工具”安装窗口，点安装。
-
-安装完成后，回到终端，重新执行这一整段：
-
-```bash
-cd ~
-git clone https://github.com/xzkitchen/video-learning-workbench.git
-cd video-learning-workbench
-bin/setup.sh
-```
-
-看到 `✅ 配置完成` 以后，再执行：
-
-```bash
-bin/install-skill.sh
-```
-
-如果提示文件夹已经存在，执行：
-
-```bash
-cd ~/video-learning-workbench
-bin/setup.sh
-```
-
-看到 `✅ 配置完成` 以后，再执行：
-
-```bash
-bin/install-skill.sh
-```
-
 ## 安装完成后怎么用
 
 安装完成后不会出现一个新的 App。这个项目是给 Codex / Claude 使用的工作流。
