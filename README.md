@@ -5,6 +5,13 @@
 ## 用法
 日常:在本目录打开 Claude Code / Codex,**把视频链接(X/YouTube)、文章链接,或视频链接+“拉片/拆解节奏”发给它**,一条龙出成片/成文/拉片报告。
 
+安装:
+```bash
+git clone https://github.com/xzkitchen/video-learning-workbench.git
+cd video-learning-workbench
+bin/setup.sh
+```
+
 新机器 / 新用户:
 ```bash
 bin/setup.sh                                    # 安装依赖 + 下载本地 Whisper 模型 + 初始化目录
