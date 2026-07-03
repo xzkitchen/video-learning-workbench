@@ -15,7 +15,7 @@ echo "== 1/5 脚本语法 =="
 for f in bin/*.sh skills/video-learning-workbench/scripts/*.sh; do
   bash -n "$f"
 done
-python3 -m py_compile bin/srt-to-md.py bin/resplit-srt.py
+python3 -m py_compile bin/srt-to-md.py bin/resplit-srt.py bin/validate-srt-alignment.py
 echo "✅ 脚本语法通过"
 
 echo

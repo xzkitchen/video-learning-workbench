@@ -7,6 +7,7 @@ import sys, re
 MAXW = float(sys.argv[3]) if len(sys.argv) > 3 else 16.0  # 全角字符数,中文≈1、英文/数字≈0.5
 SPLIT_AFTER = "，。！？；、：…,!?;:"    # 在这些标点后可断句(含半角,因译文逗号是半角)
 STRIP_TAIL  = "，、：；,;:"             # 断行处行尾这些标点去掉更干净
+CJK = r"\u3400-\u9fff\u3040-\u30ff\u3000-\u303f\uff00-\uffef"
 
 def width(s):
     return sum(1.0 if ord(c) >= 0x1100 else 0.5 for c in s)
@@ -90,6 +91,12 @@ def tidy(s):
         s = s[:-1]
     return s.strip()
 
+def normalize_text(s):
+    """清掉中文/中文标点之间的多余空格,保留 AI 工具 这类中英文空格。"""
+    s = re.sub(rf"([{CJK}])\s+([{CJK}])", r"\1\2", s)
+    s = re.sub(r"\s+", " ", s)
+    return s.strip()
+
 def main():
     blocks = re.split(r"\n\s*\n", open(sys.argv[1], encoding="utf-8").read().strip())
     out, idx = [], 1
@@ -103,7 +110,7 @@ def main():
             continue
         start_s, end_s = [x.strip() for x in lines[ti].split("-->")]
         start, end = t2ms(start_s), t2ms(end_s)
-        text = " ".join(lines[ti+1:]).strip()
+        text = normalize_text(" ".join(lines[ti+1:]).strip())
         if not text:
             continue
         if width(text) <= MAXW:
