@@ -78,6 +78,20 @@ git clone https://github.com/xzkitchen/video-learning-workbench.git
 cd video-learning-workbench
 ```
 
+注意：复制命令时只复制纯 URL，不要复制成 Markdown 链接格式。
+
+正确：
+
+```bash
+git clone https://github.com/xzkitchen/video-learning-workbench.git
+```
+
+错误：
+
+```bash
+git clone [https://github.com/xzkitchen/video-learning-workbench.git](https://github.com/xzkitchen/video-learning-workbench.git)
+```
+
 然后跑初始化：
 
 ```bash
@@ -89,6 +103,23 @@ bin/setup.sh
 如果安装过程中弹出系统安装窗口，窗口消失不代表这个工具打开了一个 App，它只是系统依赖装完了；回到终端，等命令继续跑到出现 `✅ 配置完成`。如果终端已经中断，重新执行：
 
 ```bash
+bin/setup.sh
+```
+
+如果你看到类似下面的报错：
+
+```text
+xcode-select: note: No developer tools were found, requesting install.
+cd: no such file or directory: video-learning-workbench
+zsh: no such file or directory: bin/setup.sh
+```
+
+说明 `git clone` 被系统开发者工具安装流程打断了，项目还没有下载成功。等 Command Line Tools 安装完成后，重新从第一步开始：
+
+```bash
+cd ~
+git clone https://github.com/xzkitchen/video-learning-workbench.git
+cd video-learning-workbench
 bin/setup.sh
 ```
 
