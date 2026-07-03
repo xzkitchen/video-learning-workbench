@@ -126,6 +126,22 @@ out.nosync/
 
 Codex / Claude 完成任务后会告诉你具体文件路径。
 
+## 跨设备使用
+
+如果这个项目通过 iCloud 同步到另一台 Mac，新设备第一次接管时在项目目录执行：
+
+```bash
+bin/resume-device.sh
+```
+
+如果它提示缺依赖或模型，再执行：
+
+```bash
+bin/setup.sh
+```
+
+`models.nosync/` 和 `out.nosync/` 是每台设备本地目录，不会同步大文件。
+
 ## 重要说明
 
 - 视频和模型默认只保存在本机，不会提交到 GitHub。
