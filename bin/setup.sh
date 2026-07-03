@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# setup.sh —— 在一台新 Mac 上一键配置视频学习工作台(视频翻译 + 网页翻译 + 深度拉片)
+# 跑一次:bin/setup.sh
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+
+echo "== 1/6 检查 Homebrew =="
+if ! command -v brew >/dev/null 2>&1; then
+  echo "❌ 未安装 Homebrew。先装它:https://brew.sh ,然后重跑本脚本。"
+  exit 1
+fi
+
+echo "== 2/6 初始化本地项目目录 =="
+"$ROOT/bin/init-project.sh"
+
+echo "== 3/6 安装工具(yt-dlp / ffmpeg-full / whisper-cpp)=="
+export HOMEBREW_NO_AUTO_UPDATE=1 HOMEBREW_NO_ENV_HINTS=1
+# ffmpeg-full 含 libass(烧字幕必需);whisper-cpp 提供 whisper-cli;yt-dlp 下载视频
+brew install yt-dlp ffmpeg-full whisper-cpp
+
+echo "== 4/6 安装网页翻译用的 Python 库(html2text 抓正文、markdown 出 HTML)=="
+python3 -m pip install -q html2text markdown 2>/dev/null \
+  || python3 -m pip install -q --break-system-packages html2text markdown
+
+echo "== 5/6 准备 whisper 模型(本机本地,不随 iCloud 同步)=="
+MODEL_DIR="$ROOT/models.nosync"
+MODEL="$MODEL_DIR/ggml-large-v3-turbo.bin"
+mkdir -p "$MODEL_DIR"
+if [ -f "$MODEL" ]; then
+  echo "模型已存在,跳过:$MODEL"
+else
+  echo "下载 large-v3-turbo(~1.6GB)..."
+  curl -L --fail --progress-bar -o "$MODEL" \
+    "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-large-v3-turbo.bin"
+fi
+
+echo "== 6/6 设脚本可执行并验证环境 =="
+chmod +x "$ROOT/bin/"*.sh
+"$ROOT/bin/doctor.sh"
+
+echo
+echo "✅ 配置完成,本机已可用。"
+echo "  视频:把 X/YouTube 链接发给 Claude(或 bin/1-fetch.sh / bin/transcribe.sh)→ 译 → bin/2-burn.sh"
+echo "  网页:把文章链接发给 Claude(或 bin/web-fetch.sh \"<url>\" <slug>)→ 译 zh.md → bin/web-render.sh <slug>"
+echo "  拉片:视频链接或本地 video.mp4 → bin/3-lapian.sh <slug> → 填写 lapian.md / 飞书拉片库"

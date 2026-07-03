@@ -1,0 +1,6 @@
+interface:
+  display_name: "Video Learning Workbench"
+  short_description: "Local video translation and deep lapian workflows"
+  default_prompt: "Use $video-learning-workbench to translate this video or create a deep lapian report."
+policy:
+  allow_implicit_invocation: true

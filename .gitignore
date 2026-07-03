@@ -1,0 +1,21 @@
+models.nosync/
+out.nosync/
+bin/__pycache__/
+*.pyc
+
+# User-local configuration and private working notes
+.env
+.env.*
+glossary.md
+
+# Large media artifacts
+*.mp4
+*.mov
+*.m4v
+*.wav
+*.mp3
+*.srt
+*.ass
+
+# macOS / editor noise
+.DS_Store
