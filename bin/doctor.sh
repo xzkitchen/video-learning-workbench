@@ -100,7 +100,7 @@ if command -v lark-cli >/dev/null 2>&1; then
     warn "lark-cli 已安装,但飞书授权未验证。需要写入拉片库时再登录授权。"
   fi
 else
-  warn "未安装 lark-cli。仍可输出本地 lapian.md/html,但不能自动写飞书拉片库。"
+  warn "未安装 lark-cli。仍可输出本地 lapian.md/html；如需写飞书拉片库,请跑 bin/setup-lark-cli.sh。"
 fi
 
 echo

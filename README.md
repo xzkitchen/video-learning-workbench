@@ -87,6 +87,7 @@ Codex / Claude 完成任务后会告诉你具体文件路径。
 
 - 视频和模型默认只保存在本机，不会提交到 GitHub。
 - 拉片会以真实视频声音为准，不用平台字幕冒充口播。
+- 要把拉片写入飞书表格，安装完成后再执行：`bin/setup-lark-cli.sh`。
 - YouTube 或 Instagram 下载失败时，把视频手动下载到本机，再让 Codex / Claude 继续处理。
 
 更完整的工作流细节见 [CLAUDE.md](CLAUDE.md)。
