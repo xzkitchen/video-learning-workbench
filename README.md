@@ -61,15 +61,38 @@
 - **Agent 友好**：内置 Codex Skill，Claude/Codex 可以直接调度整套工作流。
 - **开源可复制**：新机器先跑 `doctor/setup`，缺什么一目了然。
 
-## 快速开始
+## 新电脑第一次安装
+
+安装前需要：
+
+- 一台 macOS 电脑
+- 已安装 Homebrew；如果没有，先按 [brew.sh](https://brew.sh/) 的说明安装
+- 已安装 Codex / Claude Code 这类能读取本地 Skill 的 Agent 工具
+
+如果第一次在终端里使用 `git`、`brew` 或其他开发工具时，macOS 弹出 Command Line Tools / 开发者工具安装窗口，选择安装即可。安装窗口消失后，回到终端继续；如果刚才的命令已经中断，就重新执行一次。
+
+先把项目放到一个固定目录：
 
 ```bash
 git clone https://github.com/xzkitchen/video-learning-workbench.git
 cd video-learning-workbench
+```
+
+然后跑初始化：
+
+```bash
 bin/setup.sh
 ```
 
-检查环境：
+这一步会安装本机依赖、初始化目录，并下载 Whisper 模型。模型大约 1.6GB，第一次会比较久。
+
+如果安装过程中弹出系统安装窗口，窗口消失不代表这个工具打开了一个 App，它只是系统依赖装完了；回到终端，等命令继续跑到出现 `✅ 配置完成`。如果终端已经中断，重新执行：
+
+```bash
+bin/setup.sh
+```
+
+确认环境没问题：
 
 ```bash
 bin/doctor.sh
@@ -81,11 +104,32 @@ bin/doctor.sh
 bin/install-skill.sh
 ```
 
-开启新 Codex 会话后，可以直接用：
+安装完成后不会出现一个单独的软件窗口。这个 Skill 的作用是让 Codex / Claude 知道“遇到视频翻译、网页翻译、拉片任务时该怎么调度这个项目”。
+
+下一步：
+
+1. 关闭当前 Codex / Claude 会话，重新打开一个新会话。
+2. 最好在 `video-learning-workbench` 这个项目目录里打开新会话。
+3. 直接把视频链接、文章链接或本地视频路径发给它，并明确点名这个 Skill。
+
+第一次可以这样测试：
 
 ```text
 Use $video-learning-workbench to translate this video into a Chinese hard-subtitled MP4.
 Use $video-learning-workbench to create a deep lapian report for this video.
+```
+
+也可以直接用中文：
+
+```text
+用 $video-learning-workbench 把这个视频做成中文字幕成片：https://...
+用 $video-learning-workbench 对这个视频做深度拉片：https://...
+```
+
+如果 Codex 找不到项目目录，把这句话一起发给它：
+
+```text
+项目目录是：/你的/本地路径/video-learning-workbench
 ```
 
 ## 日常使用

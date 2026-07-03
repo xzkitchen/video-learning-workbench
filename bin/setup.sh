@@ -41,6 +41,10 @@ chmod +x "$ROOT/bin/"*.sh
 
 echo
 echo "✅ 配置完成,本机已可用。"
-echo "  视频:把 X/YouTube 链接发给 Claude(或 bin/1-fetch.sh / bin/transcribe.sh)→ 译 → bin/2-burn.sh"
-echo "  网页:把文章链接发给 Claude(或 bin/web-fetch.sh \"<url>\" <slug>)→ 译 zh.md → bin/web-render.sh <slug>"
-echo "  拉片:视频链接或本地 video.mp4 → bin/3-lapian.sh <slug> → 填写 lapian.md / 飞书拉片库"
+echo
+echo "下一步:"
+echo "  1. 安装 Codex Skill: bin/install-skill.sh"
+echo "  2. 重新打开一个 Codex / Claude 新会话,最好在本项目目录中打开"
+echo "  3. 发送: 用 \$video-learning-workbench 把这个视频做成中文字幕成片: <视频链接>"
+echo
+echo "说明:这个项目不会启动一个单独的 App。Skill 是给 Codex / Claude 读取的工作说明和脚本调度入口。"
