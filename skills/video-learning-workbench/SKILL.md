@@ -13,7 +13,15 @@ Use this skill to run the repository's local scripts for three workflows:
 
 ## Repository Location
 
-Before acting, locate the tool repository. Prefer the current workspace if it contains `bin/doctor.sh`, `bin/setup.sh`, and `bin/_lib.sh`. If not, ask the user for the repository path or clone/install location.
+Before acting, locate the tool repository. Prefer the current workspace if it contains `bin/doctor.sh`, `bin/setup.sh`, and `bin/_lib.sh`.
+
+If the current workspace is only a video/file folder, do not ask the user to move the repository into that folder. First check common install locations:
+
+1. `~/video-learning-workbench`
+2. `~/Desktop/video-learning-workbench`
+3. `~/Documents/video-learning-workbench`
+
+Use the first location that contains `bin/doctor.sh`, `bin/setup.sh`, and `bin/_lib.sh`. Only ask the user for the repository path if none of those locations exists.
 
 Never assume the skill folder itself contains the runnable app; the skill is the playbook, the repository is the runtime.
 

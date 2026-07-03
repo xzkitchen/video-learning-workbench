@@ -4,6 +4,8 @@
 
 Accept an X/Twitter, YouTube, Instagram, or local video. Choose a stable `slug` from the topic or filename.
 
+The local video file does not need to be inside the repository. If the user provides an absolute local video path, work from the repository root, create `out.nosync/<slug>/`, and copy the video there as `video.mp4` before transcribing.
+
 ## Steps
 
 1. Fetch and transcribe:

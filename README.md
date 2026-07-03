@@ -100,6 +100,8 @@ bin/install-skill.sh
 2. 打开这个项目文件夹：`~/video-learning-workbench`。
 3. 直接发任务。
 
+如果你是在别的文件夹里打开会话，就在任务里加一句：`项目目录是 ~/video-learning-workbench`。
+
 可以这样说：
 
 ```text
