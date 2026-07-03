@@ -9,6 +9,15 @@ DEST_ROOT="${CODEX_HOME:-$HOME/.codex}/skills"
 DEST="$DEST_ROOT/video-learning-workbench"
 MODEL="$ROOT/models.nosync/ggml-large-v3-turbo.bin"
 
+if ! command -v brew >/dev/null 2>&1; then
+  for candidate in /opt/homebrew/bin/brew /usr/local/bin/brew; do
+    if [ -x "$candidate" ]; then
+      export PATH="$(dirname "$candidate"):$PATH"
+      break
+    fi
+  done
+fi
+
 [ -d "$SRC" ] || { echo "❌ 缺少 $SRC"; exit 1; }
 mkdir -p "$DEST_ROOT"
 rm -rf "$DEST"

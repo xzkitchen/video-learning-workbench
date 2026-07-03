@@ -7,6 +7,14 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
 echo "== 1/6 检查 Homebrew =="
 if ! command -v brew >/dev/null 2>&1; then
+  for candidate in /opt/homebrew/bin/brew /usr/local/bin/brew; do
+    if [ -x "$candidate" ]; then
+      export PATH="$(dirname "$candidate"):$PATH"
+      break
+    fi
+  done
+fi
+if ! command -v brew >/dev/null 2>&1; then
   echo "❌ 未安装 Homebrew,本机依赖还不能配置。"
   echo
   echo "请先复制执行这一行:"
@@ -17,6 +25,7 @@ if ! command -v brew >/dev/null 2>&1; then
   echo "bin/setup.sh"
   exit 1
 fi
+BREW="$(command -v brew)"
 
 echo "== 2/6 初始化本地项目目录 =="
 "$ROOT/bin/init-project.sh"
@@ -24,7 +33,7 @@ echo "== 2/6 初始化本地项目目录 =="
 echo "== 3/6 安装工具(yt-dlp / ffmpeg-full / whisper-cpp)=="
 export HOMEBREW_NO_AUTO_UPDATE=1 HOMEBREW_NO_ENV_HINTS=1
 # ffmpeg-full 含 libass(烧字幕必需);whisper-cpp 提供 whisper-cli;yt-dlp 下载视频
-brew install yt-dlp ffmpeg-full whisper-cpp
+"$BREW" install yt-dlp ffmpeg-full whisper-cpp
 
 echo "== 4/6 安装网页翻译用的 Python 库(html2text 抓正文、markdown 出 HTML)=="
 python3 -m pip install -q html2text markdown 2>/dev/null \

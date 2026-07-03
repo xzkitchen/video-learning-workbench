@@ -22,6 +22,8 @@ On a new Mac, Homebrew must be installed before `bin/setup.sh` can install depen
 
 Run `bin/setup.sh` from the repository root. It initializes local folders, installs Homebrew dependencies, installs Python libraries, downloads the Whisper model, and reruns `bin/doctor.sh`.
 
+The setup and doctor scripts auto-detect Homebrew at `/opt/homebrew/bin/brew` or `/usr/local/bin/brew`, so they can continue in the same terminal immediately after a fresh Homebrew install.
+
 Only run `bin/install-skill.sh` after `bin/setup.sh` finishes successfully. If the user pasted all commands at once and `setup.sh` failed, `install-skill.sh` may still have copied the Skill, but the machine is not ready until setup passes.
 
 Use `bin/init-project.sh` when dependencies are already installed and only local directories / `glossary.md` need to be created.

@@ -8,7 +8,20 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 MODEL="$ROOT/models.nosync/ggml-large-v3-turbo.bin"
 
 # ffmpeg-full(含 libass,烧字幕必需)。brew --prefix 动态定位,跨机/Intel 都适用。
-FF_FULL="$(brew --prefix ffmpeg-full 2>/dev/null)/bin/ffmpeg"
+BREW_BIN="$(command -v brew || true)"
+if [ -z "$BREW_BIN" ]; then
+  for candidate in /opt/homebrew/bin/brew /usr/local/bin/brew; do
+    if [ -x "$candidate" ]; then
+      BREW_BIN="$candidate"
+      break
+    fi
+  done
+fi
+FF_PREFIX=""
+if [ -n "$BREW_BIN" ]; then
+  FF_PREFIX="$("$BREW_BIN" --prefix ffmpeg-full 2>/dev/null || true)"
+fi
+FF_FULL="${FF_PREFIX:+$FF_PREFIX/bin/ffmpeg}"
 [ -x "$FF_FULL" ] || FF_FULL=""
 # 与 ffmpeg-full 同目录的 ffprobe(探测视频朝向用)
 FFPROBE="${FF_FULL:+${FF_FULL%/ffmpeg}/ffprobe}"

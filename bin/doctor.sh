@@ -8,6 +8,15 @@ MODEL="$ROOT/models.nosync/ggml-large-v3-turbo.bin"
 FAIL=0
 WARN=0
 
+if ! command -v brew >/dev/null 2>&1; then
+  for candidate in /opt/homebrew/bin/brew /usr/local/bin/brew; do
+    if [ -x "$candidate" ]; then
+      export PATH="$(dirname "$candidate"):$PATH"
+      break
+    fi
+  done
+fi
+
 ok() { printf '✅ %s\n' "$1"; }
 warn() { printf '⚠️  %s\n' "$1"; WARN=$((WARN + 1)); }
 fail() { printf '❌ %s\n' "$1"; FAIL=$((FAIL + 1)); }
@@ -34,7 +43,8 @@ echo
 echo "== ffmpeg-full / libass =="
 FF_FULL=""
 if command -v brew >/dev/null 2>&1; then
-  FF_FULL="$(brew --prefix ffmpeg-full 2>/dev/null)/bin/ffmpeg"
+  FF_PREFIX="$(brew --prefix ffmpeg-full 2>/dev/null || true)"
+  [ -n "$FF_PREFIX" ] && FF_FULL="$FF_PREFIX/bin/ffmpeg"
 fi
 if [ -x "$FF_FULL" ]; then
   ok "ffmpeg-full: $FF_FULL"
